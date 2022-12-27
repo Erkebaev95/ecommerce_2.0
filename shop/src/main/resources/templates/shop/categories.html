@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>List-categories</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="container">
+
+    <a th:href="@{/admin/addCategory}" style="margin: 20px 0" class="btn btn-primary">Добавить категорию</a>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Удалить</th>
+            <th scope="col">Редактировать</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="cat : ${categories}">
+            <td th:text="${cat.name}"></td>
+
+            <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${cat.id})}" class="btn btn-danger">Удалить</a></td>
+            <td><a href="" th:href="@{/admin/categories/update/{id}(id=${cat.id})}" class="btn btn-warning">Редактировать</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>

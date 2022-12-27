@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Add-products</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment"/>
+
+<div class="container">
+    <h3>Добавьте нового продукта</h3>
+    <form th:action="@{/admin/saveProduct}" method="post" th:object="${product}"
+          enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-5">
+
+                <input type="hidden" name="id" th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">Названия продукта</label>
+                    <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"
+                           placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="category">Выберите категорию</label>
+                    <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+                        <option th:each="category :${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Цена</label>
+                    <input type="number" class="form-control" required th:field="*{price}" name="price" id="price"
+                           placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label for="status">Статус</label>
+                    <select class="form-control" th:field="*{status}" id="status" name="status">
+                        <option th:each="s :${status}"
+                                th:value="${s.id}"
+                                th:text="${s.name}">
+                    </select>
+                </div>
+
+                <!--<div class="form-group">
+                    <label for="options">Опция</label>
+                    <select class="form-control" th:field="*{categoryId.option}" id="options" name="status">
+                        <option th:each="o :${options}"
+                                th:value="${o.id}"
+                                th:text="${o.name}">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="values">Значения</label>
+                    <select class="form-control" th:field="*{value}" id="values" name="values">
+                        <option th:each="v :${values}"
+                                th:value="${v.id}"
+                                th:text="${v.name}">
+                    </select>
+                </div>
+            </div>-->
+
+                <div class="col-sm-5">
+                    <p>Добавить фото</p>
+                    <div>
+                        <input type="file" name="file" accept="image/png, image/jpeg" id="image"/>
+                        <label for="image"></label>
+                    </div>
+                </div>
+
+                <!--<div class="form-group custom-file">
+                    <label for="image">Добавить фото</label>
+                    <input type="file" name="file" accept="image/png, image/jpeg" id="image"/>
+
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>-->
+
+                <div class="col-sm-5">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </div>
+    </form>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment"/>
+</body>
+</html>

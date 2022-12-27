@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Add-category</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form th:action="@{/admin/saveCategory}" th:object="${category}" method="post">
+                <input type="hidden" name="id"  th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">Название категории</label>
+                    <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"  placeholder="Enter name">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>

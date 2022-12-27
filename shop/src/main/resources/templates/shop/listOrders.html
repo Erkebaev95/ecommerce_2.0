@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Cart-page</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment"/>
+
+<div class="container-fluid">
+    <form th:action="@{/listOrders}">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Почта</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">Город</th>
+                <th scope="col">Код города</th>
+                <th scope="col">Улица</th>
+                <th scope="col">Дом</th>
+                <th scope="col">Номер квартиры</th>
+                <th scope="col">Комментарии</th>
+                <!--<th scope="col">Удалить</th>-->
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="o : ${orders}">
+                <td th:text="${o.name}"></td>
+                <td th:text="${o.surname}"></td>
+                <td th:text="${o.email}"></td>
+                <td th:text="${o.phone}"></td>
+                <td th:text="${o.city}"></td>
+                <td th:text="${o.zipCode}"></td>
+                <td th:text="${o.street}"></td>
+                <td th:text="${o.house}"></td>
+                <td th:text="${o.apartment}"></td>
+                <td th:text="${o.comment}"></td>
+
+                <!--<td>
+                    <a th:href="@{/deleteOrder/{id}(id=${o.id})}" class="btn btn-danger">Удалить</a>
+                </td>-->
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment"/>
+</body>
+</html>

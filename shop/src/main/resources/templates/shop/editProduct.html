@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+  <title>List-products</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <form th:action="@{/admin/editProduct}" th:object="${product}" method="post"
+            enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="form-group">
+          <label for="name">Название продукта</label>
+          <input type="text" class="form-control"
+                 required th:field="*{name}"
+                 name="name" id="name"  placeholder="Enter name">
+        </div>
+
+        <div class="form-group">
+          <label for="price">Цена</label>
+          <input type="text" class="form-control"
+                 required th:field="*{price}"
+                 name="price" id="price" placeholder="Enter name">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Категория</label>
+          <select class="form-control" th:field="*{categoryId.id}" id="category">
+            <option th:each="category : ${categories}"
+                    th:value="${category.getId()}"
+                    th:text="${category.getName()}">
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Статус</label>
+          <select class="form-control" th:field="*{status.id}" id="status">
+            <option th:each="s : ${status}"
+                    th:value="${s.getId()}"
+                    th:text="${s.getName()}">
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group md-form md-outline mt-2">
+          <label for="form76">Дополнительная информация</label>
+          <textarea id="form76" th:field="*{description}" class="md-textarea form-control" rows="4"></textarea>
+        </div>
+
+        <div class="col-sm-5">
+          <p>Добавить фото</p>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file" accept="image/png, image/jpeg" id="image"/>
+            <label class="custom-file-label" for="image">Choose file</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Обновить</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>

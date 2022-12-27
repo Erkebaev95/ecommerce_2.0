@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Admin-page</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">Добро пожаловать, администратор</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 pt-3" >
+            <div class="card" style="background-color:white;">
+                <div class="card-body">
+                    <h4 class="card-title">Категория</h4>
+                    <p class="card-text">Manage the categories section here.</p>
+                    <a href="#" th:href="@{/admin/categories}" class="card-link btn btn-primary">Manage</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 pt-3" >
+            <div class="card" style="background-color:white;">
+                <div class="card-body">
+                    <h4 class="card-title">Продукты</h4>
+                    <p class="card-text">Manage all the products here.</p>
+                    <a href="#" th:href="@{/admin/listProduct}" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 pt-3" >
+            <div class="card" style="background-color:white;">
+                <div class="card-body">
+                    <h4 class="card-title">Заказы</h4>
+                    <p class="card-text">Manage all the orders here.</p>
+                    <a href="#" th:href="@{/admin/listOrders}" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 pt-3" >
+            <div class="card" style="background-color:white;">
+                <div class="card-body">
+                    <h4 class="card-title">Пользователи</h4>
+                    <p class="card-text">Manage all the users here.</p>
+                    <a href="#" th:href="@{/admin/listUsers}" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>

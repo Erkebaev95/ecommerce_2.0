@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Cart-page</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment"/>
+
+<div class="container-fluid">
+    <form th:action="@{/listOrders}">
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Продукт</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Общая сумма</th>
+            <th scope="col">Удалить</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="c : ${carts}">
+            <td th:text="${c.getProduct().name}"></td>
+            <td th:text="${c.getProduct().price}"></td>
+            <td>
+                <nav class="col-6">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link plusButton" th:href="@{addQuantity/{id}(id=${c.id})}"><b>+</b></a>
+                        </li>
+                        <li class="page-item">
+                            <span class="form-control text-center" style="max-width: 55px;"
+                                  type="text" th:text="${c.quantity}"></span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link minusButton" th:href="@{decreaseQuantity/{id}(id=${c.id})}"><b>-</b></a>
+                        </li>
+                    </ul>
+                </nav>
+            </td>
+
+            <td th:text="${c.totalPrice}"></td>
+
+            <td>
+                <a th:href="@{/deleteOrder/{id}(id=${c.id})}" class="btn btn-danger">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+        <div>
+            <a href="" th:href="@{/buy}" class="btn btn-warning">Купить</a>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment"/>
+</body>
+</html>

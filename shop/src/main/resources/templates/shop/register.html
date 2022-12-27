@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Document</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="container">
+    <div class="col-sm-6">
+        <h3 style="margin-top: 10px">Регистрация</h3>
+        <p>Пожалуйста, заполните это, чтобы зарегистрироваться</p>
+        <form th:action="@{/registration}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" name="login" id="login" required placeholder="Login" class="form-control form-control-lg">
+            </div>
+            <div class="form-group">
+                <label for="firstName">Имя</label>
+                <input type="text" name="name" id="firstName" required placeholder="Имя" class="form-control form-control-lg">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Фамилия</label>
+                <input type="text" name="surname" id="lastName" required placeholder="Фамилия" class="form-control form-control-lg">
+            </div>
+            <div class="form-group">
+                <label for="email">Почта</label>
+                <input type="email" class="form-control form-control-lg" required minlength="6" placeholder="Почта" name="email" id="email"
+                       aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">Мы не будем распространять вашу почту.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" class="form-control form-control-lg" required placeholder="Пароль" name="password"
+                       id="password">
+            </div>
+
+            <input type="submit" value="Регистрация" class="btn btn-primary btn-block">
+            <!--<span style="margin-top: 10px">Уже существует этот аккаунт
+                <a class="linkControl" th:href="@{/login}">Login here</a></span>-->
+        </form>
+    </div>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>

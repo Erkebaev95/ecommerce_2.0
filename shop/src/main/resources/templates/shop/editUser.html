@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>List-products</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form th:action="@{/admin/editUser}" th:object="${user}" method="post">
+                <input type="hidden" name="id"  th:field="*{id}">
+                <div class="form-group">
+                    <label for="login">Логин</label>
+                    <input type="text" class="form-control"
+                           required th:field="*{username}"
+                           name="login" id="login"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" class="form-control"
+                           required th:field="*{name}"
+                           name="name" id="name"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Фамилия</label>
+                    <input type="text" class="form-control"
+                           required th:field="*{surname}"
+                           name="surname" id="surname"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Почта</label>
+                    <input type="text" class="form-control"
+                           required th:field="*{email}"
+                           name="email" id="email"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="text" class="form-control"
+                           required th:field="*{password}"
+                           name="password" id="password"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="role">Роль</label>
+                    <select class="form-control" name="role" id="role">
+                        <option th:each="role : ${roles}"
+                                th:value="${role.getId()}"
+                                th:text="${role.getDisplayName()}">
+
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <th:block th:replace="fragments/link_fragment :: link_fragment"/>
+    <title>Main-page</title>
+</head>
+<body>
+
+<th:block th:replace="fragments/navbar_fragment :: navbar_fragment" />
+
+<div class="container" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-sm-3">
+            <form class="col" th:method="GET" th:action="@{/products}">
+
+                <div class="list-group">
+                    <label class="list-group-item btn btn-outline-primary" for="category">Все Категории: </label>
+                    <select class="list-group-item" id="category" name="categoryId">
+                        <option class="list-group-item"
+                                th:each="cat : ${categories}"
+                                th:value="${cat.getId()}"
+                                th:text="${cat.getName()}">
+                        </option>
+
+                        <option class="list-group-item" value="0">
+                            Все продукты
+                        </option>
+                    </select>
+                </div>
+
+                <div class="list-group-item">
+                    <label for="text">Введите названия товара:</label>
+                    <input class="form-control me-2" type="text" id="text"
+                           name="searchByName" placeholder="Search" aria-label="Search">
+                </div>
+
+                <div class="list-group-item">
+                    <label for="minPrice">Минимальная цена: </label>
+                    <input class="list-group-item" style="width: 100px" type="number" id="minPrice" name="min">
+
+                    <label for="maxPrice">Максимальная цена:</label>
+                    <input class="list-group-item" style="width: 100px" type="number" id="maxPrice" name="max">
+                </div>
+
+                <div class="list-group">
+                    <button class="btn btn-outline-success" type="submit">Искать</button>
+                    <br>
+                    <div th:if="${user.role?.serviceName == 'ROLE_ADMIN'}">
+                        <a th:href="@{/admin}"
+                           class="btn btn-outline-primary">Страница админа</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card" style="margin-top: 20px" th:each="product : ${result}">
+                <div class="row no-gutters">
+                    <div class="col-sm-5 d-flex justify-content-center">
+                        <img th:src="@{${product.photosImagePath}}" height="180px" width="200px" alt="files">
+                    </div>
+
+                    <div class="col-sm-7 d-flex justify-content-center">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <h4><span th:text="${product.price}"></span> ₸.</h4>
+                            <p class="card-text" th:text="${product.description}"></p>
+                            <a th:href="@{/addToCart/{id}(id=${product.id})}" class="btn btn-primary">В корзину</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/script_fragment :: script_fragment" />
+</body>
+</html>
